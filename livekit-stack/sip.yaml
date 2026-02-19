@@ -1,0 +1,15 @@
+log_level: debug
+
+api_key: db0d444618adcd17e59b3cf768d636e0
+api_secret: fd1bba949f4f4782bb75ea7dd350a79882cfdfa0a2574cb28573861d7ef353fa
+
+ws_url: ws://livekit:7880
+
+redis:
+  address: redis:6379
+
+sip_port: 5060
+rtp_port: 10000-20000
+
+nat_1_to_1_ip: 34.202.237.45
+

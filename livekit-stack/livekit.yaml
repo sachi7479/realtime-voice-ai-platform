@@ -1,0 +1,11 @@
+port: 7880
+rtc:
+  udp_port: 7882
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 60000
+keys:
+  db0d444618adcd17e59b3cf768d636e0: fd1bba949f4f4782bb75ea7dd350a79882cfdfa0a2574cb28573861d7ef353fa
+redis:
+  address: redis:6379
+  db: 0

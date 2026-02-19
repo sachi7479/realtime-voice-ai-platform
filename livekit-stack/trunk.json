@@ -1,0 +1,7 @@
+
+{
+  "trunk": {
+    "name": "Test-Trunk",
+    "allowed_addresses": ["0.0.0.0/0"]
+  }
+}
