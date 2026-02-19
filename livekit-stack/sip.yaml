@@ -1,7 +1,7 @@
 log_level: debug
 
-api_key: db0d444618adcd17e59b3cf768d636e0
-api_secret: fd1bba949f4f4782bb75ea7dd350a79882cfdfa0a2574cb28573861d7ef353fa
+api_key: db0d444618adcd17e59b3cf768d636e0 # these should be generated securely and kept secret and use yours instead of these
+api_secret: fd1bba949f4f4782bb75ea7dd350a79882cfdfa0a2574cb28573861d7ef353fa  # these should be generated securely and kept secret and use yours instead of these
 
 ws_url: ws://livekit:7880
 
