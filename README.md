@@ -77,78 +77,67 @@ realtime-voice-ai-platform/
 ```bash
 git clone https://github.com/sachi7479/realtime-voice-ai-platform.git
 cd realtime-voice-ai-platform 
+```
 
-
-
-2. Run Infrastructure Bootstrap
+```bash
+Run Infrastructure Bootstrap
 chmod +x bootstrap/full_bootstrap.sh
 ./bootstrap/full_bootstrap.sh
 
+```
 
-This will:
+---
 
-Install Docker
+## 🛠 1. This will do these things
 
-Create Docker network
-
-Deploy Redis
-
-Deploy LiveKit server
-
-Deploy LiveKit SIP service
-
-Generate LiveKit API credentials
-
-Create SIP trunk
-
-Create dispatch rule
-
-Prepare voice agent environment
-
-3. Configure API Keys
-
-Edit:
-
-nano voice-agent/.env
+* **Docker & Networking:** Installs Docker and creates a dedicated internal network.
+* **Redis:** Deploys Redis for session management and state handling.
+* **LiveKit Stack:** Deploys the LiveKit Server and the LiveKit SIP service.
+* **Credentials:** Automatically generates the required LiveKit API keys and secrets.
+* **SIP Logic:** Configures the SIP trunk and dispatch rules for handling calls.
+* **Environment:** Sets up the Python virtual environment for the voice agent.
 
 
-Add your:
 
-DEEPGRAM_API_KEY
+---
 
-GROQ_API_KEY
+## 🔑 2. Configure API Keys
 
-ELEVEN_API_KEY
+The voice agent requires credentials from external AI providers for speech processing and intelligence.
 
-4. Start the AI Agent
+1.  Open the environment configuration file:
+    ```bash
+    nano voice-agent/.env
+    ```
+2.  Enter your API keys for the following services:
+    * **DEEPGRAM_API_KEY:** Used for fast Speech-to-Text (STT).
+    * **GROQ_API_KEY:** Used for low-latency LLM (Llama 3 / Mixtral) inference.
+    * **ELEVEN_API_KEY:** Used for high-quality Text-to-Speech (TTS).
+    * **LIVEKIT_URL=**ws://localhost:7880
+    * **LIVEKIT_API_KEY=**your_generated_api_key
+    * **LIVEKIT_API_SECRET=**your_generated_api_secret
+
+---
+
+## 🚀 3. Start the AI Agent
+
+Once the infrastructure is live and keys are configured, start the agent service:
+
+```bash
 cd voice-agent
 source venv/bin/activate
-python agent.py
-
-SIP Configuration
+python3 agent.py
+```
+### SIP Configuration
 
 After deployment, your SIP URI will be:
+  * **sip:test@YOUR_PUBLIC_IP**
 
-sip:test@YOUR_PUBLIC_IP
+Make sure your EC2 Security Group allows the following inbound ports:
 
-
-Make sure your EC2 Security Group allows:
-
-5060 (UDP & TCP)
-
-7880 (LiveKit)
-
-10000-20000 (RTP)
-
-50000-60000 (WebRTC range)
-
-
-
-Environment Variables
-
-DEEPGRAM_API_KEY=
-GROQ_API_KEY=
-ELEVEN_API_KEY=
-LIVEKIT_URL=ws://localhost:7880
-LIVEKIT_API_KEY=
-LIVEKIT_API_SECRET=
+| Port(s)       | Protocol | Purpose               |
+|---------------|----------|-----------------------|
+| 5060          | UDP/TCP  | SIP signaling         |
+| 7880          | TCP      | LiveKit HTTP/WebSocket|
+| 10000–20000   | UDP      | RTP media             |
+| 50000–60000   | UDP      | WebRTC ICE range      |
